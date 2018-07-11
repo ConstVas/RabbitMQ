@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v2.0": {
       "miniSophie/1.0.0": {
         "dependencies": {
+          "DeclareRpcClient": "1.0.0",
           "Newtonsoft.Json": "11.0.2",
           "RabbitMQ.Client": "5.1.0"
         },
@@ -691,6 +692,14 @@
           "Microsoft.NETCore.Targets": "1.1.0",
           "System.Runtime": "4.3.0"
         }
+      },
+      "DeclareRpcClient/1.0.0": {
+        "dependencies": {
+          "RabbitMQ.Client": "5.1.0"
+        },
+        "runtime": {
+          "DeclareRpcClient.dll": {}
+        }
       }
     }
   },
@@ -1140,6 +1149,11 @@
       "sha512": "sha512-E+J4OQ1pyWwdr2qaTfOpUa7PLHZ1KwvaKfn0GMnBsFboyzexmhSt2SCjFAKt7UqCWoTAMjTPdEwEui02VZCMVw==",
       "path": "system.threading.timer/4.3.0",
       "hashPath": "system.threading.timer.4.3.0.nupkg.sha512"
+    },
+    "DeclareRpcClient/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

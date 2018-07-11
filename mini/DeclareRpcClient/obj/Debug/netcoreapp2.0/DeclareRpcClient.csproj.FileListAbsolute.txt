@@ -1,0 +1,9 @@
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\bin\Debug\netcoreapp2.0\DeclareRpcClient.deps.json
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\bin\Debug\netcoreapp2.0\DeclareRpcClient.dll
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\bin\Debug\netcoreapp2.0\DeclareRpcClient.pdb
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.AssemblyInfoInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.AssemblyInfo.cs
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.dll
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.pdb
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.csprojResolveAssemblyReference.cache

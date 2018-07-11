@@ -1,10 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using DeclareRpcClient;
+using Newtonsoft.Json;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
 using System.Collections.Concurrent;
 using System.Text;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace miniAuth
 {
@@ -17,7 +19,7 @@ namespace miniAuth
     {
         public static void Main()
         {
-            var rpcClient = new RpcClient();
+            var rpcClient = new AuthRpcClient();
 
             Console.WriteLine(" [x] Ожидание запросов");
             var unser = "";
@@ -43,7 +45,6 @@ namespace miniAuth
                     default:
                         break;
                 }
-                Console.ReadLine();
             }
 
             Console.WriteLine(" Нажмите [Any key] чтобы выйти.");
@@ -54,37 +55,24 @@ namespace miniAuth
     }
 
 
-    public class RpcClient
+    public class AuthRpcClient : RpcClient
     {
-        private readonly IConnection connection;
-        private readonly IModel channel;
-        private readonly string replyQueueName;
-        private readonly EventingBasicConsumer consumer;
-        private readonly BlockingCollection<string> respQueue = new BlockingCollection<string>();
-        private readonly IBasicProperties props;
-
-        public RpcClient()
+        public AuthRpcClient() : base("Auth")
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
+        }
 
-            connection = factory.CreateConnection("Auth");
-            channel = connection.CreateModel();
-            replyQueueName = channel.QueueDeclare().QueueName;
-            consumer = new EventingBasicConsumer(channel);
-
-            props = channel.CreateBasicProperties();
-            DeclareExchange();
+        public override void InitReceived()
+        {
             ReceivedSendClaims();
         }
 
-        public void DeclareExchange()
+        public override void DeclareAMQPObjects()
         {
-            channel.ExchangeDeclare(exchange: "user_model", type: "topic");
-            channel.ExchangeDeclare(exchange: "user_logs", type: "topic");
+            base.DeclareAMQPObjects();
 
+            channel.BasicConsume(queue: "claim_queue",
+              autoAck: false, consumer: consumer);
 
-            channel.QueueDeclare(queue: "claim_queue", durable: false,
-                         exclusive: true, autoDelete: true, arguments: null);
         }
 
         public void EmitUserBlock()
@@ -130,11 +118,8 @@ namespace miniAuth
         public void ReceivedSendClaims()
         {
             channel.BasicQos(0, 1, false);
-            var consumer = new EventingBasicConsumer(channel);
-            channel.BasicConsume(queue: "claim_queue",
-              autoAck: false, consumer: consumer);
-
-            consumer.Received += (model, ea) =>
+            
+            consumer.Received += async (model, ea) =>
             {
                 string response = null;
 
@@ -162,17 +147,13 @@ namespace miniAuth
                       basicProperties: replyProps, body: responseBytes);
                     channel.BasicAck(deliveryTag: ea.DeliveryTag,
                       multiple: false);
+                    await Task.Delay(0);
                 }
             };
         }
         string GetClaims(string UserId)
         {
             return "Claims_" + UserId;
-        }
-
-        public void Close()
-        {
-            connection.Close();
         }
     }
 

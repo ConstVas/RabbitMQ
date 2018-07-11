@@ -1483,6 +1483,19 @@
         "compile": {
           "ref/netstandard1.2/System.Threading.Timer.dll": {}
         }
+      },
+      "DeclareRpcClient/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "RabbitMQ.Client": "5.1.0"
+        },
+        "compile": {
+          "bin/placeholder/DeclareRpcClient.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/DeclareRpcClient.dll": {}
+        }
       }
     }
   },
@@ -5140,10 +5153,16 @@
         "system.threading.timer.4.3.0.nupkg.sha512",
         "system.threading.timer.nuspec"
       ]
+    },
+    "DeclareRpcClient/1.0.0": {
+      "type": "project",
+      "path": "../DeclareRpcClient/DeclareRpcClient.csproj",
+      "msbuildProject": "../DeclareRpcClient/DeclareRpcClient.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "DeclareRpcClient >= 1.0.0",
       "EasyNetQ >= 3.1.1",
       "Microsoft.NETCore.App >= 2.0.0",
       "Newtonsoft.Json >= 11.0.2",
@@ -5180,7 +5199,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Projects\\My-projects\\RabbitMQ\\mini\\DeclareRpcClient\\DeclareRpcClient.csproj": {
+              "projectPath": "C:\\Projects\\My-projects\\RabbitMQ\\mini\\DeclareRpcClient\\DeclareRpcClient.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

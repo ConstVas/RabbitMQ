@@ -4,6 +4,9 @@ using System.Text;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Newtonsoft.Json;
+using DeclareRpcClient;
+using System.Threading.Tasks.Dataflow;
+using System.Threading.Tasks;
 
 namespace miniSophie
 {
@@ -16,12 +19,11 @@ namespace miniSophie
     {
         public static void Main()
         {
-            var rpcClient = new RpcClient();
+            var rpcClient = new SophieRpcClient();
             var unser = "";
             while (unser != "q")
             {
                 Console.WriteLine("1:Запросить Клеймы у miniAuth");
-                Console.WriteLine("2:Изменить данные в БД о Department");
                 Console.WriteLine("q:Выйти");
 
                 unser = Console.ReadLine();
@@ -31,92 +33,54 @@ namespace miniSophie
                     case "1":
                         var UserId = Guid.NewGuid().ToString();
                         Console.WriteLine(" [x] Получить клеймы для пользователя: {0}", UserId);
+
+
+
                         var claims = rpcClient.GetClaims(UserId);
-                        Console.WriteLine(" [.] Полученые клеймы '{0}'", claims);
-                        break;
-                    case "2":
-                        rpcClient.EmitDepartmentChange();
-                        Console.WriteLine(" [x] Данные Department изменены");
+
+                        var newTaswk = claims.ContinueWith(
+                            (x) =>
+                            {
+                                Console.WriteLine(" [.] Полученые клеймы '{0}'", x.Result);
+                            });
                         break;
                     case "q":
                         break;
                     default:
                         break;
                 }
-                Console.ReadLine();
             }
 
             rpcClient.Close();
         }
-
-        public static Department GetDepartments()
-        {
-            return new Department();
-        }
-
-        public static string[] GetClaims()
-        {
-            return new string[1];
-        }
-
-        public static void ChangeDB()
-        {
-
-        }
     }
-    public class Department
+    public class SophieRpcClient : RpcClient
     {
+        protected readonly BufferBlock<string> respQueue = new BufferBlock<string>();
+        public SophieRpcClient() : base("Sophie")
+        { }
 
-    }
-    public class RpcClient
-    {
-        private readonly IConnection connection;
-        private readonly IModel channel;
-        private readonly string replyQueueName;
-        private readonly EventingBasicConsumer consumer;
-        private readonly BlockingCollection<string> respQueue = new BlockingCollection<string>();
-        private readonly IBasicProperties props;
-
-        public RpcClient()
+        public override void InitReceived()
         {
-            var factory = new ConnectionFactory() { HostName = "localhost" };
-
-            connection = factory.CreateConnection("Sophie");
-            channel = connection.CreateModel();
-            replyQueueName = channel.QueueDeclare().QueueName;
-            consumer = new EventingBasicConsumer(channel);
-
-            props = channel.CreateBasicProperties();
-            // декларация обьектов  
-            DeclareExchange();
-
             ReceiveUserChange();
-            ReceivedSendDepartments();
-
         }
 
-        public void DeclareExchange()
+        public override void DeclareAMQPObjects()
         {
-            channel.ExchangeDeclare(exchange: "user_model", type: "topic");
-            channel.ExchangeDeclare(exchange: "user_logs", type: "topic");
-            channel.ExchangeDeclare(exchange: "topic_logs", type: "topic");
-            channel.ExchangeDeclare(exchange: "change_model", type: "topic");
+            base.DeclareAMQPObjects();
 
-
-            channel.QueueDeclare(queue: "get_data_queue", durable: false,
-                         exclusive: false, autoDelete: true, arguments: null);
+            //channel.BasicConsume(queue: "claim_queue",
+            //  autoAck: false, consumer: consumer);
         }
 
         public void ReceiveUserChange()
         {
-            var queueName = channel.QueueDeclare().QueueName;
-
+            var queueName = "ReceiveUserChange";
             channel.QueueBind(queue: queueName,
                                   exchange: "user_logs",
                                   routingKey: "user.#");
 
-            var consumer = new EventingBasicConsumer(channel);
-            consumer.Received += (model, ea) =>
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body;
                 var jsonified = Encoding.UTF8.GetString(body);
@@ -125,38 +89,29 @@ namespace miniSophie
                 Console.WriteLine(" [.] Получено сообщение по ключу '{0}':Пользователь Id='{1}', Name ='{2}'",
                                   routingKey,
                                   user.Id, user.Name);
+                await Task.Delay(250);
             };
             channel.BasicConsume(queue: queueName,
                                  autoAck: true,
                                  consumer: consumer);
         }
-
-        public void EmitDepartmentChange()
-        {
-            var routingKey = "models.department";
-            var message = "В Sophie изменилась сущность Department!";
-            var body = Encoding.UTF8.GetBytes(message);
-            channel.BasicPublish(exchange: "topic_logs",
-                                 routingKey: routingKey,
-                                 basicProperties: null,
-                                 body: body);
-            Console.WriteLine(" [x] Отправлено сообщение с ключем '{0}':'{1}'", routingKey, message);
-        }
-        public string GetClaims(string UserId)
+        public async Task<string> GetClaims(string UserId)
         {
 
             var correlationId = Guid.NewGuid().ToString();
             props.CorrelationId = correlationId;
             props.ReplyTo = replyQueueName;
 
-            consumer.Received += (model, ea) =>
+
+            consumer.Received += async (model, ea) =>
             {
                 var body = ea.Body;
                 var response = Encoding.UTF8.GetString(body);
                 if (ea.BasicProperties.CorrelationId == correlationId)
                 {
-                    respQueue.Add(response);
+                    respQueue.Post(response);
                 }
+                await Task.Delay(0);
             };
 
             var messageBytes = Encoding.UTF8.GetBytes(UserId);
@@ -171,8 +126,11 @@ namespace miniSophie
                 queue: replyQueueName,
                 autoAck: true);
 
-            return respQueue.Take();
+            var result = await respQueue.ReceiveAsync();
+
+            return result;
         }
+
         public void ReceivedSendDepartments()
         {
             channel.BasicQos(0, 1, false);
@@ -214,11 +172,6 @@ namespace miniSophie
         string GetDepartments(string name)
         {
             return "Список департаментов";
-        }
-
-        public void Close()
-        {
-            connection.Close();
         }
     }
 }
