@@ -1,0 +1,10 @@
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\bin\Debug\netcoreapp2.0\miniZooey.deps.json
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\bin\Debug\netcoreapp2.0\miniZooey.runtimeconfig.json
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\bin\Debug\netcoreapp2.0\miniZooey.runtimeconfig.dev.json
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\bin\Debug\netcoreapp2.0\miniZooey.dll
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\bin\Debug\netcoreapp2.0\miniZooey.pdb
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\obj\Debug\netcoreapp2.0\miniZooey.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\obj\Debug\netcoreapp2.0\miniZooey.AssemblyInfoInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\obj\Debug\netcoreapp2.0\miniZooey.AssemblyInfo.cs
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\obj\Debug\netcoreapp2.0\miniZooey.dll
+C:\Projects\My-projects\RabbitMQ\mini\miniZooey\obj\Debug\netcoreapp2.0\miniZooey.pdb

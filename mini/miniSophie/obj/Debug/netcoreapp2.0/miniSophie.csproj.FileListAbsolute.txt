@@ -1,0 +1,11 @@
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\bin\Debug\netcoreapp2.0\miniSophie.deps.json
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\bin\Debug\netcoreapp2.0\miniSophie.runtimeconfig.json
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\bin\Debug\netcoreapp2.0\miniSophie.runtimeconfig.dev.json
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\bin\Debug\netcoreapp2.0\miniSophie.dll
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\bin\Debug\netcoreapp2.0\miniSophie.pdb
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.AssemblyInfoInputs.cache
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.AssemblyInfo.cs
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.dll
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.pdb
+C:\Projects\My-projects\RabbitMQ\mini\miniSophie\obj\Debug\netcoreapp2.0\miniSophie.csprojResolveAssemblyReference.cache

@@ -1,0 +1,10 @@
+C:\Projects\My-projects\RabbitMQ\RPCServer\bin\Debug\netcoreapp2.0\RPCServer.deps.json
+C:\Projects\My-projects\RabbitMQ\RPCServer\bin\Debug\netcoreapp2.0\RPCServer.runtimeconfig.json
+C:\Projects\My-projects\RabbitMQ\RPCServer\bin\Debug\netcoreapp2.0\RPCServer.runtimeconfig.dev.json
+C:\Projects\My-projects\RabbitMQ\RPCServer\bin\Debug\netcoreapp2.0\RPCServer.dll
+C:\Projects\My-projects\RabbitMQ\RPCServer\bin\Debug\netcoreapp2.0\RPCServer.pdb
+C:\Projects\My-projects\RabbitMQ\RPCServer\obj\Debug\netcoreapp2.0\RPCServer.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\RPCServer\obj\Debug\netcoreapp2.0\RPCServer.AssemblyInfoInputs.cache
+C:\Projects\My-projects\RabbitMQ\RPCServer\obj\Debug\netcoreapp2.0\RPCServer.AssemblyInfo.cs
+C:\Projects\My-projects\RabbitMQ\RPCServer\obj\Debug\netcoreapp2.0\RPCServer.dll
+C:\Projects\My-projects\RabbitMQ\RPCServer\obj\Debug\netcoreapp2.0\RPCServer.pdb

@@ -1,0 +1,10 @@
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\bin\Debug\netcoreapp2.0\ReceiveLogs.deps.json
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\bin\Debug\netcoreapp2.0\ReceiveLogs.runtimeconfig.json
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\bin\Debug\netcoreapp2.0\ReceiveLogs.runtimeconfig.dev.json
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\bin\Debug\netcoreapp2.0\ReceiveLogs.dll
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\bin\Debug\netcoreapp2.0\ReceiveLogs.pdb
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\obj\Debug\netcoreapp2.0\ReceiveLogs.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\obj\Debug\netcoreapp2.0\ReceiveLogs.AssemblyInfoInputs.cache
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\obj\Debug\netcoreapp2.0\ReceiveLogs.AssemblyInfo.cs
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\obj\Debug\netcoreapp2.0\ReceiveLogs.dll
+C:\Projects\My-projects\RabbitMQ\ReceiveLogs\obj\Debug\netcoreapp2.0\ReceiveLogs.pdb
