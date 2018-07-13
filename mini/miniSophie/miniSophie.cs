@@ -63,14 +63,19 @@ namespace miniSophie
         public override void InitReceived()
         {
             ReceiveUserChange();
+            //ReceivedRecursion();
         }
 
         public override void DeclareAMQPObjects()
         {
             base.DeclareAMQPObjects();
 
-            //channel.BasicConsume(queue: "claim_queue",
-            //  autoAck: false, consumer: consumer);
+            channel.QueueDeclare(queue: "SophieRecursion", durable: false,
+                         exclusive: false, autoDelete: false, arguments: null);
+
+            channel.ExchangeDeclare(exchange: "SophieRecursion", type: "topic");
+            channel.BasicConsume(queue: "SophieRecursion",
+              autoAck: false, consumer: consumer);
         }
 
         public void ReceiveUserChange()
@@ -130,7 +135,6 @@ namespace miniSophie
 
             return result;
         }
-
         public void ReceivedSendDepartments()
         {
             channel.BasicQos(0, 1, false);
@@ -172,6 +176,74 @@ namespace miniSophie
         string GetDepartments(string name)
         {
             return "Список департаментов";
+        }
+
+        public void ReceivedRecursion()
+        {
+            channel.BasicQos(0, 1, false);
+
+            var queueName = "SophieRecursion";
+            channel.QueueBind(queue: queueName,
+                                  exchange: "SophieRecursion",
+                                  routingKey: "#");
+
+            consumer.Received += async (model, ea) =>
+            {
+                string response = null;
+
+                var body = ea.Body;
+                var props = ea.BasicProperties;
+                var replyProps = channel.CreateBasicProperties();
+                replyProps.CorrelationId = props.CorrelationId;
+
+                try
+                {
+                    var message = Encoding.UTF8.GetString(body);
+                    response = CallRecursion(message).ToString();
+                }
+                finally
+                {
+                    var responseBytes = Encoding.UTF8.GetBytes(response);
+                    channel.BasicPublish(exchange: "AuthRecursion", routingKey: props.ReplyTo,
+                      basicProperties: replyProps, body: responseBytes);
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag,
+                      multiple: false);
+                    await Task.Delay(0);
+                }
+            };
+        }
+        public async Task<string> CallRecursion(string name)
+        {
+            var correlationId = Guid.NewGuid().ToString();
+            props.CorrelationId = correlationId;
+            props.ReplyTo = replyQueueName;
+
+            consumer.Received += async (model, ea) =>
+            {
+                var body = ea.Body;
+                var response = Encoding.UTF8.GetString(body);
+                if (ea.BasicProperties.CorrelationId == correlationId)
+                {
+                    respQueue.Post(response);
+                }
+                await Task.Delay(0);
+            };
+
+            var messageBytes = Encoding.UTF8.GetBytes(name);
+            channel.BasicPublish(
+                exchange: "SophieRecursion",
+                routingKey: "Recursion",
+                basicProperties: props,
+                body: messageBytes);
+
+            channel.BasicConsume(
+                consumer: consumer,
+                queue: replyQueueName,
+                autoAck: true);
+
+            var result = await respQueue.ReceiveAsync();
+
+            return result;
         }
     }
 }

@@ -1,0 +1,16 @@
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\miniSophie.exe.config
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\miniSophie.exe
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\miniSophie.pdb
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\DeclareRpcClient.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\RabbitMQ.Client.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\DeclareRpcClient.pdb
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\bin\Debug\RabbitMQ.Client.xml
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\obj\Debug\miniSophie.csprojAssemblyReference.cache
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\obj\Debug\miniSophie.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\obj\Debug\miniSophie.csproj.CopyComplete
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\obj\Debug\miniSophie.exe
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\miniSophie\obj\Debug\miniSophie.pdb

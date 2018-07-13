@@ -5,9 +5,10 @@ C:\Projects\My-projects\RabbitMQ\mini\miniAuth\bin\Debug\netcoreapp2.0\miniAuth.
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\bin\Debug\netcoreapp2.0\miniAuth.pdb
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\bin\Debug\netcoreapp2.0\DeclareRpcClient.dll
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\bin\Debug\netcoreapp2.0\DeclareRpcClient.pdb
-C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.csprojResolveAssemblyReference.cache
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.csproj.CoreCompileInputs.cache
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.AssemblyInfoInputs.cache
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.AssemblyInfo.cs
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.dll
 C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.pdb
+C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.csprojAssemblyReference.cache
+C:\Projects\My-projects\RabbitMQ\mini\miniAuth\obj\Debug\netcoreapp2.0\miniAuth.csproj.CopyComplete

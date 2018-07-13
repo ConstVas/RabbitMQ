@@ -6,4 +6,4 @@ C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\D
 C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.AssemblyInfo.cs
 C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.dll
 C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.pdb
-C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.csprojResolveAssemblyReference.cache
+C:\Projects\My-projects\RabbitMQ\mini\DeclareRpcClient\obj\Debug\netcoreapp2.0\DeclareRpcClient.csprojAssemblyReference.cache

@@ -1,0 +1,11 @@
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\DeclareRpcClient.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\DeclareRpcClient.pdb
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\RabbitMQ.Client.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\Microsoft.Diagnostics.Tracing.EventSource.xml
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\bin\Debug\RabbitMQ.Client.xml
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\obj\Debug\DeclareRpcClient.csprojAssemblyReference.cache
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\obj\Debug\DeclareRpcClient.csproj.CoreCompileInputs.cache
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\obj\Debug\DeclareRpcClient.csproj.CopyComplete
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\obj\Debug\DeclareRpcClient.dll
+C:\Projects\My-projects\RabbitMQ\RabbitMQExample\DeclareRpcClient\obj\Debug\DeclareRpcClient.pdb

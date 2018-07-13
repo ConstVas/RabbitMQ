@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 
 namespace miniAuth
 {
@@ -28,6 +29,7 @@ namespace miniAuth
             {
                 Console.WriteLine("1:Пользователь создан");
                 Console.WriteLine("2:Заблокировать пользователя");
+                Console.WriteLine("3:Вызвать рекурсию");
                 Console.WriteLine("q:Выйти");
 
                 unser = Console.ReadLine();
@@ -39,6 +41,15 @@ namespace miniAuth
                         break;
                     case "2":
                         rpcClient.EmitUserBlock();
+                        break;
+                    case "3":
+                        var req = rpcClient.CallRecursion("Recursion");
+
+                        var newTaswk = req.ContinueWith(
+                            (x) =>
+                            {
+                                Console.WriteLine(x.Result);
+                            });
                         break;
                     case "q":
                         break;
@@ -57,6 +68,7 @@ namespace miniAuth
 
     public class AuthRpcClient : RpcClient
     {
+        protected readonly BufferBlock<string> respQueue = new BufferBlock<string>();
         public AuthRpcClient() : base("Auth")
         {
         }
@@ -64,15 +76,21 @@ namespace miniAuth
         public override void InitReceived()
         {
             ReceivedSendClaims();
+            //ReceivedRecursion();
         }
 
         public override void DeclareAMQPObjects()
         {
-            base.DeclareAMQPObjects();
+           base.DeclareAMQPObjects();
 
+            channel.QueueDeclare(queue: "AuthRecursion", durable: false,
+                         exclusive: false, autoDelete: false, arguments: null);
             channel.BasicConsume(queue: "claim_queue",
-              autoAck: false, consumer: consumer);
+             autoAck: false, consumer: consumer);
 
+            channel.ExchangeDeclare(exchange: "AuthRecursion", type: "topic");
+            channel.BasicConsume(queue: "AuthRecursion",
+              autoAck: false, consumer: consumer);
         }
 
         public void EmitUserBlock()
@@ -154,6 +172,73 @@ namespace miniAuth
         string GetClaims(string UserId)
         {
             return "Claims_" + UserId;
+        }
+
+        public async Task<string> CallRecursion(string name)
+        {
+            var correlationId = Guid.NewGuid().ToString();
+            props.CorrelationId = correlationId;
+            props.ReplyTo = replyQueueName;
+
+            consumer.Received += async (model, ea) =>
+            {
+                var body = ea.Body;
+                var response = Encoding.UTF8.GetString(body);
+                if (ea.BasicProperties.CorrelationId == correlationId)
+                {
+                    respQueue.Post(response);
+                }
+                await Task.Delay(0);
+            };
+
+            var messageBytes = Encoding.UTF8.GetBytes(name);
+            channel.BasicPublish(
+                exchange: "AuthRecursion",
+                routingKey: "Recursion",
+                basicProperties: props,
+                body: messageBytes);
+
+            channel.BasicConsume(
+                consumer: consumer,
+                queue: replyQueueName,
+                autoAck: true);
+
+            var result = await respQueue.ReceiveAsync();
+
+            return result;
+        }
+        public void ReceivedRecursion()
+        {
+            channel.BasicQos(0, 1, false);
+
+            var queueName = "AuthRecursion";
+            channel.QueueBind(queue: queueName,
+                                  exchange: "AuthRecursion",
+                                  routingKey: "#");
+            consumer.Received += async (model, ea) =>
+            {
+                string response = null;
+
+                var body = ea.Body;
+                var props = ea.BasicProperties;
+                var replyProps = channel.CreateBasicProperties();
+                replyProps.CorrelationId = props.CorrelationId;
+
+                try
+                {
+                    var message = Encoding.UTF8.GetString(body);
+                    response = CallRecursion(message).ToString();
+                }
+                finally
+                {
+                    var responseBytes = Encoding.UTF8.GetBytes(response);
+                    channel.BasicPublish(exchange: "SophieRecursion", routingKey: props.ReplyTo,
+                      basicProperties: replyProps, body: responseBytes);
+                    channel.BasicAck(deliveryTag: ea.DeliveryTag,
+                      multiple: false);
+                    await Task.Delay(0);
+                }
+            };
         }
     }
 
